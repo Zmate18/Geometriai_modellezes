@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 from bezier import bezier_curve
 from draw import draw_curve
-from utils import bezier_length
+from utils import bezier_length, estimate_area
 
 # Inicializálás
 pygame.init()
@@ -10,7 +10,7 @@ pygame.init()
 WIDTH, HEIGHT = 900, 700
 CENTER_X, CENTER_Y = WIDTH // 2, HEIGHT // 2
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Bezier-görbe")
+pygame.display.set_caption("Bezier görbe")
 manager = pygame_gui.UIManager((WIDTH, HEIGHT))
 
 clock = pygame.time.Clock()
@@ -102,6 +102,10 @@ while running:
     curve = bezier_curve(control_points, steps)
     length = bezier_length(curve)
 
+    # Terület becslése a görbe mentén
+    closed_curve = curve + [curve[0]]
+    area = estimate_area(closed_curve)
+
     screen.fill((30, 30, 30))
 
     # Kontrollpontok közti vonalak
@@ -112,6 +116,8 @@ while running:
     if len(curve) > 1:
         draw_curve(screen, curve)
 
+    pygame.draw.polygon(screen, (255, 255, 255, 50), closed_curve, 0)
+
     # Kontrollpontok
     for point in control_points:
         pygame.draw.circle(screen, (255, 0, 0), point, 5)
@@ -119,6 +125,10 @@ while running:
     # Görbe hossza
     length_text = font.render(f"Görbe hossza: {round(length, 2)} px", True, (255, 255, 255))
     screen.blit(length_text, (10, HEIGHT - 30))
+
+    # Terület becslése
+    area_text = font.render(f"Közelítő terület: {round(area)} px²", True, (255, 255, 255))
+    screen.blit(area_text, (10, HEIGHT - 55))
 
     manager.draw_ui(screen)
 
