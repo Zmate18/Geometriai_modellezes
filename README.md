@@ -20,12 +20,13 @@ Ez az alkalmazás lehetőséget nyújt Bézier görbék szerkesztésére és ras
 
 ## Használat
 
-1. **Függőségek telepítése:**
+1. **Telepítés:**
 
 ```bash
-pip install pygame pygame_gui numpy
+pip install -r requirements.txt
 ```
 2. **Program futtatása:**
 
 ```bash
 python main.py
+```

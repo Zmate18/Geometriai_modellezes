@@ -1,8 +1,8 @@
 import pygame
 import pygame_gui
-from bezier import bezier_curve
-from draw import draw_curve
-from utils import bezier_length, estimate_area
+from src.bezier import bezier_curve
+from src.draw import draw_curve
+from src.utils import bezier_length, estimate_area
 
 # Inicializálás
 pygame.init()
