@@ -18,6 +18,31 @@ Ez az alkalmazás lehetőséget nyújt Bézier görbék szerkesztésére és ras
 - UI panel a pontsűrűség (interpolációs lépések száma) beállításához
 - Kontrollpontok visszaállítása alaphelyzetbe gombbal
 
+## Terület becslése
+
+A Bézier-görbe által körbezárt területet a **saru formula** (*shoelace formula*) segítségével becsülöm. A módszer lényege, hogy a görbét kis szakaszokra bontom, majd az így kapott pontokat egy sokszöggé zárom, és erre alkalmazom a következő képletet:
+
+```math
+A = \frac{1}{2} \left| \sum_{i=0}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) \right|
+```
+
+ahol $(x_i, y_i)$ a sokszög pontjai, és $n$ a pontok száma. Az utolsó pont $x_n, y_n$ megegyezik az első ponttal a zárás miatt.
+
+### Példa mérések
+
+A pontosság a görbét alkotó szegmensek számától (`steps`) függ. Az alábbi táblázat bemutatja, hogyan közelít a terület az `steps` növelésével:
+
+| Steps | Becsült terület (px²) |
+|-------|-----------------------|
+| 10    | 39506                 |
+| 50    | 39983                 |
+| 100   | 39996                 |
+| 200   | 39999                 |
+| 500   | 40000                 |
+| 1000  | 40000                 |
+
+Látható, hogy a becsült terület értéke már viszonylag alacsony `steps` szám esetén is közelít a végleges értékhez. 100 lépéstől kezdve az eltérés minimális, 500 és 1000 lépésnél pedig a becsült terület eléri a stabil 40000 px² értéket.
+
 ## Használat
 
 1. **Telepítés:**
