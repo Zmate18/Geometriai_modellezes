@@ -1,6 +1,7 @@
 import pygame
+from app import config
 
-def draw_curve(surface, curve_points, color=(0, 255, 0), width=6):
+def draw_curve(surface, curve_points):
     """
     Kirajzolja a Bézier görbét a megadott pontok alapján.
 
@@ -13,4 +14,10 @@ def draw_curve(surface, curve_points, color=(0, 255, 0), width=6):
         Csak akkor rajzol, ha legalább két pontból áll a görbe.
     """
     if len(curve_points) > 1:
-        pygame.draw.lines(surface, color, False, curve_points, width)
+        pygame.draw.lines(
+            surface,
+            config.CURVE_COLOR,
+            False,
+            curve_points,
+            config.CURVE_WIDTH
+        )
