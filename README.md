@@ -12,7 +12,7 @@ Ez az alkalmazás lehetőséget nyújt Bézier görbék szerkesztésére és ras
 ## Funkciók
 
 - Interaktív kontrollpont mozgatás egérrel
-- Bézier görbe kiszámítása és kirajzolása a de Casteljau-algoritmus alapján
+- Bézier görbe kiszámítása és kirajzolása a de Casteljau algoritmus alapján
 - A görbe mentén számított hossz megjelenítése
 - A görbe által bezárt terület közelítő becslése
 - UI panel a pontsűrűség (interpolációs lépések száma) beállításához
@@ -20,7 +20,7 @@ Ez az alkalmazás lehetőséget nyújt Bézier görbék szerkesztésére és ras
 
 ## Terület becslése
 
-A Bézier-görbe által körbezárt területet a **saru formula** (*shoelace formula*) segítségével becsülöm. A módszer lényege, hogy a görbét kis szakaszokra bontom, majd az így kapott pontokat egy sokszöggé zárom, és erre alkalmazom a következő képletet:
+A Bézier görbe által körbezárt területet a **saru formula** (*shoelace formula*) segítségével becsülöm. A módszer lényege, hogy a görbét kis szakaszokra bontom, majd az így kapott pontokat egy sokszöggé zárom, és erre alkalmazom a következő képletet:
 
 ```math
 A = \frac{1}{2} \left| \sum_{i=0}^{n-1} (x_i y_{i+1} - x_{i+1} y_i) \right|
